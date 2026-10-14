@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="icon" href="data:," />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap" rel="stylesheet" />
+  <title>ইউনিয়ন নির্বাচন পোস্টার মেকার</title>
+  <style>
+    :root{
+      color-scheme:light dark;
+      --bg:#f3f5f2;--surface:#fff;--surface-2:#eef1ec;--ink:#122019;--muted:#5c6861;
+      --line:#d7ddd8;--accent:#087443;--accent-2:#f4b942;--danger:#a53131;--shadow:0 14px 38px rgba(20,38,28,.11);
+      --focus:#0b7c49;
+    }
+    @media(prefers-color-scheme:dark){:root{--bg:#101512;--surface:#19211c;--surface-2:#222d26;--ink:#edf5ef;--muted:#acb9b0;--line:#344139;--accent:#3ac27b;--accent-2:#e9b84c;--danger:#f08d8d;--shadow:0 14px 40px rgba(0,0,0,.34);--focus:#65d89a}}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;background:var(--bg)}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Hind Siliguri","Noto Sans Bengali","Nirmala UI","Vrinda",sans-serif;min-height:100vh}
+    button,input,select{font:inherit}button{cursor:pointer}.shell{max-width:1500px;margin:auto;padding:18px clamp(14px,3vw,34px) 46px}
+    .intro{display:flex;justify-content:space-between;align-items:flex-end;gap:22px;padding:12px 0 20px;border-bottom:1px solid var(--line)}
+    .intro h1{font-size:clamp(25px,3.4vw,44px);line-height:1.06;margin:0 0 7px;letter-spacing:-.02em}.intro p{margin:0;color:var(--muted);font-size:16px}.intro .note{max-width:360px;text-align:right;font-size:14px;color:var(--muted)}
+    .workspace{display:grid;grid-template-columns:minmax(310px,400px) minmax(520px,1fr) minmax(260px,330px);gap:18px;align-items:start;margin-top:20px}
+    .panel{background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow)}.templates,.editor{border-radius:16px}.templates{padding:16px}.editor{padding:18px;position:sticky;top:12px}.stage-panel{position:sticky;top:12px}
+    .panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}.panel-head h2{font-size:20px;margin:0}.count{font-size:13px;color:var(--muted)}
+    .tabs{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}.tab{border:1px solid var(--line);background:var(--surface-2);color:var(--ink);padding:7px 11px;border-radius:999px;font-weight:600;font-size:14px}.tab.active{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+    .gallery{display:grid;grid-template-columns:1fr 1fr;gap:11px}.template-card{border:1px solid var(--line);background:var(--surface);padding:7px;border-radius:11px;text-align:left;color:var(--ink);position:relative;transition:border-color .15s,box-shadow .15s}.template-card:hover{border-color:var(--accent)}.template-card.active{outline:3px solid color-mix(in srgb,var(--accent) 25%,transparent);border-color:var(--accent)}
+    .thumb{aspect-ratio:4/5;border-radius:7px;overflow:hidden;position:relative;color:#fff;padding:9px;display:flex;flex-direction:column;justify-content:flex-end}.thumb:before{content:"";position:absolute;inset:13% 22% 37%;border-radius:50% 50% 38% 38%;background:linear-gradient(#e2e6e3 38%,#7f8982 39%);border:3px solid currentColor;opacity:.92}.thumb:after{content:"আপনার ছবি";position:absolute;top:55%;left:0;right:0;text-align:center;font-size:9px;opacity:.85}.thumb strong,.thumb small{z-index:1;line-height:1.15;text-shadow:0 1px 2px #0008}.thumb strong{font-size:13px}.thumb small{font-size:9px}
+    .t1{background:linear-gradient(165deg,#fffdf2 0 58%,#0d8a4e 59% 80%,#c81e2c 81%);color:#0b6e3f}
+    .t2{background:repeating-conic-gradient(from 0deg at 50% 30%,#fff8e2 0 11deg,#f5b93f 11deg 22deg);color:#a33c14}
+    .t3{background:radial-gradient(circle at 50% 30%,#1c130a,#050403 62%,#000 63%);color:#e8c25e}
+    .t4{background:linear-gradient(180deg,#f2fff6 0 52%,#0c8348 53% 100%);color:#0b6e3f}
+    .t5{background:linear-gradient(160deg,#f2f9ff 0 52%,#1a6fc4 53% 78%,#0a3572 79%);color:#155a9e}
+    .t6{background:linear-gradient(180deg,#ffffff 0 70%,#eef6ef 71%);color:#1c6b44;border:1px solid #dfe8e1}
+    .t7{background:radial-gradient(circle at 50% 32%,#7a2433,#1f090d 65%,#120406 66%);color:#e8c25e}
+    .t8{background:linear-gradient(165deg,#f9f0fa 0 56%,#8a4f9e 57% 80%,#572a70 81%);color:#6a3583}
+    .t9{background:linear-gradient(165deg,#fff5f8 0 56%,#efa9c2 57% 80%,#b5456e 81%);color:#b12c5f}
+    .t10{background:radial-gradient(circle at 50% 30%,#12706a,#030d0b 62%,#020807 63%);color:#e3c46a}
+    .badge{position:absolute;top:12px;right:12px;background:#fff;color:#152019;border-radius:999px;font:bold 10px sans-serif;padding:4px 6px;box-shadow:0 2px 8px #0003}.badge.premium{background:#19150b;color:#f5cb67}.card-meta{padding:7px 2px 1px;line-height:1.12}.card-meta strong{display:block;font-size:13px}.card-meta span{font-size:11px;color:var(--muted)}
+    .stage-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}.stage-top strong{font-size:14px}.stage-top span{font-size:12px;color:var(--muted)}
+    .canvas-wrap{background:repeating-conic-gradient(#dfe3df 0 25%,#edf0ed 0 50%) 0/18px 18px;padding:clamp(8px,2vw,18px);border:1px solid var(--line);border-radius:14px;display:flex;justify-content:center;position:relative}.canvas-wrap.locked canvas{filter:blur(3px) grayscale(.3)}canvas{display:block;width:min(100%,560px);height:auto;aspect-ratio:4/5;background:#173f2a;box-shadow:0 15px 35px #0003;touch-action:none}.lock-cover{display:none;position:absolute;inset:0;align-items:center;justify-content:center}.canvas-wrap.locked .lock-cover{display:flex}.lock-box{background:color-mix(in srgb,var(--surface) 94%,transparent);border:1px solid var(--line);padding:18px;text-align:center;max-width:260px;box-shadow:var(--shadow)}.lock-box b{font-size:20px;display:block}.lock-box p{font-size:13px;margin:4px 0 12px;color:var(--muted)}
+    .stage-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.btn{border:0;border-radius:10px;padding:11px 14px;font-weight:700;min-height:45px}.btn.primary{background:var(--accent);color:#fff}.btn.secondary{background:var(--ink);color:var(--bg)}.btn.ghost{background:var(--surface-2);color:var(--ink);border:1px solid var(--line)}.btn.gold{background:var(--accent-2);color:#251d08}.btn:focus-visible,.tab:focus-visible,.template-card:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid color-mix(in srgb,var(--focus) 38%,transparent);outline-offset:2px}
+    .status{margin-top:10px;padding:9px 12px;font-size:13px;border-radius:8px;background:var(--surface-2);color:var(--muted);min-height:39px}.status.ok{color:var(--accent)}.status.err{color:var(--danger)}
+    .group{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}.group:first-of-type{border-top:0;margin-top:0;padding-top:0}.group-title{font-size:14px;font-weight:700;margin:0 0 10px}.field{display:block;margin-bottom:10px}.field span{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:4px}.field input,.field select{width:100%;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;padding:9px 10px;min-height:42px}.twocol{display:grid;grid-template-columns:1fr 1fr;gap:9px}.upload{display:flex;gap:8px;align-items:center}.upload input{display:none}.upload label{flex:1;text-align:center;background:var(--surface-2);border:1px dashed var(--accent);border-radius:9px;padding:11px;font-weight:700;color:var(--accent);cursor:pointer}.file-name{font-size:11px;color:var(--muted);margin-top:5px;display:block}.range-row{display:grid;grid-template-columns:76px 1fr 36px;gap:8px;align-items:center;font-size:12px;margin:8px 0}.range-row input{width:100%;accent-color:var(--accent)}
+    .upsell{margin-top:12px;background:var(--surface);border:1px solid var(--line);padding:14px;border-radius:13px;display:flex;align-items:center;justify-content:space-between;gap:12px}.upsell b{display:block}.upsell span{font-size:12px;color:var(--muted)}.upsell .price{color:var(--ink);font-weight:700;margin-top:3px}
+    dialog{border:1px solid var(--line);border-radius:15px;background:var(--surface);color:var(--ink);padding:0;width:min(92vw,470px);box-shadow:0 24px 70px #0007}dialog::backdrop{background:#07130dbb}.modal{padding:20px}.modal h3{margin:0 0 6px;font-size:23px}.modal p{color:var(--muted);margin:0 0 15px}.modal .row{display:flex;gap:8px}.modal input{flex:1;min-width:0;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:9px;padding:11px}.modal-foot{display:flex;justify-content:flex-end;gap:8px;margin-top:15px}.payment-box{background:var(--surface-2);border:1px solid var(--line);padding:13px;border-radius:10px;margin:14px 0}.payment-box span{display:block;color:var(--muted);font-size:12px}.payment-box strong{display:block;font-size:23px;letter-spacing:.03em;margin:2px 0 7px}.payment-box b{color:var(--accent)}.code-label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}.unlock-message{min-height:20px;margin-top:8px;font-size:13px;color:var(--danger)}.unlock-message.ok{color:var(--accent)}
+    .footnote{margin-top:18px;font-size:12px;color:var(--muted);text-align:center}
+    @media(max-width:1120px){.workspace{grid-template-columns:330px 1fr}.editor{grid-column:1/-1;position:static;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.editor .panel-head{grid-column:1/-1}.editor .group{margin:0;padding:0;border:0}.editor .group:nth-of-type(3){border-left:1px solid var(--line);padding-left:14px}.stage-panel{top:10px}}
+    @media(max-width:760px){.shell{padding:10px 10px 34px}.intro{align-items:flex-start;padding:8px 4px 14px}.intro .note{display:none}.workspace{display:flex;flex-direction:column;margin-top:12px}.stage-panel{order:0;position:static;width:100%}.templates{order:1;width:100%}.editor{order:2;width:100%;display:block;padding:15px}.gallery{grid-template-columns:repeat(2,1fr)}.canvas-wrap{padding:8px}.stage-actions{grid-template-columns:1fr 1fr}.upsell{align-items:flex-start;flex-direction:column}.upsell .btn{width:100%}}
+    @media(max-width:360px){.stage-actions{grid-template-columns:1fr}.gallery{gap:8px}.templates{padding:12px}.intro h1{font-size:24px}.modal .row{flex-direction:column}.modal .row .btn{width:100%}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+<main class="shell">
+  <section class="intro" aria-labelledby="main-title">
+    <div><h1 id="main-title">ডিজাইন বেছে নিন। তথ্য দিন। পোস্টার ডাউনলোড করুন।</h1><p>চেয়ারম্যান, সদস্য ও সংরক্ষিত মহিলা সদস্য — ১০টি আলাদা ডিজাইন।</p></div>
+    <div class="note">ছবি ও লেখা এই ডিভাইসেই থাকে। কোনো লগইন লাগে না।</div>
+  </section>
+
+  <section class="workspace">
+    <aside class="panel templates">
+      <div class="panel-head"><h2>টেমপ্লেট</h2><span class="count" id="templateCount">১০টি ডিজাইন</span></div>
+      <div class="tabs" role="tablist" aria-label="পদের ধরন">
+        <button class="tab active" data-filter="all">সব</button><button class="tab" data-filter="chairman">চেয়ারম্যান</button><button class="tab" data-filter="member">সদস্য</button><button class="tab" data-filter="women">মহিলা সদস্য</button>
+      </div>
+      <div class="gallery" id="gallery"></div>
+    </aside>
+
+    <section class="stage-panel">
+      <div class="stage-top"><strong id="activeName">চেয়ারম্যান বিজয়</strong><span>প্রিভিউ · ৪:৫</span></div>
+      <div class="canvas-wrap" id="canvasWrap">
+        <canvas id="poster" width="1200" height="1500" aria-label="নির্বাচনী পোস্টারের লাইভ প্রিভিউ"></canvas>
+        <div class="lock-cover"><div class="lock-box"><b>প্রিমিয়াম ডিজাইন</b><p>ডাউনলোড করতে আনলক কোড দিন।</p><button class="btn gold" id="openUnlock">আনলক করুন</button></div></div>
+      </div>
+      <div class="stage-actions">
+        <button class="btn primary" id="downloadJpg">JPG ডাউনলোড</button>
+        <button class="btn secondary" id="downloadPdf">PDF ডাউনলোড</button>
+      </div>
+      <div class="status" id="status" aria-live="polite">বাম পাশ থেকে ডিজাইন বেছে নিন, তারপর তথ্য পরিবর্তন করুন।</div>
+      <div class="upsell"><div><b>নিজে বানাতে সময় নেই?</b><span>আপনার তথ্য দিয়ে সম্পূর্ণ পোস্টার বানিয়ে নিন।</span><span class="price">সার্ভিস মূল্য: <span id="servicePriceText">৩০০</span> টাকা</span></div><button class="btn gold" id="serviceBtn">হোয়াটসঅ্যাপে অর্ডার করুন</button></div>
+      <div class="footnote">ফ্রি ডিজাইনের ডাউনলোডে ছোট ওয়াটারমার্ক থাকবে।</div>
+    </section>
+
+    <aside class="panel editor">
+      <div class="panel-head"><h2>নিজের তথ্য</h2><button class="btn ghost" id="resetBtn">রিসেট</button></div>
+      <div class="group">
+        <p class="group-title">প্রার্থী</p>
+        <div class="upload"><input id="photoInput" type="file" accept="image/png,image/jpeg,image/webp"><label for="photoInput">ছবি আপলোড করুন</label></div><span class="file-name" id="fileName">PNG, JPG বা WEBP</span>
+        <label class="field"><span>প্রার্থীর নাম</span><input id="candidateName" value="মোঃ আব্দুল করিম" maxlength="36"></label>
+        <label class="field"><span>পদ</span><select id="postName"><option>চেয়ারম্যান পদপ্রার্থী</option><option>সদস্য পদপ্রার্থী</option><option>সংরক্ষিত মহিলা সদস্য পদপ্রার্থী</option></select></label>
+      </div>
+      <div class="group">
+        <p class="group-title">এলাকা ও বার্তা</p>
+        <div class="twocol"><label class="field"><span>ওয়ার্ড</span><input id="ward" value="০৫ নং ওয়ার্ড" maxlength="22"></label><label class="field"><span>ইউনিয়ন</span><input id="union" value="সোনাপুর ইউনিয়ন" maxlength="28"></label></div>
+        <label class="field"><span>উপজেলা · জেলা</span><input id="area" value="কানাইঘাট, সিলেট" maxlength="34"></label>
+        <label class="field"><span>মূল বার্তা</span><input id="slogan" value="উন্নয়ন ও জনসেবায় আপনার পাশে" maxlength="42"></label>
+        <label class="field"><span>নির্বাচনী প্রতীক</span><input id="symbol" value="নির্বাচনী প্রতীক" maxlength="26"></label>
+      </div>
+      <div class="group">
+        <p class="group-title">ছবির অবস্থান</p>
+        <div class="range-row"><span>আকার</span><input id="photoScale" type="range" min="70" max="180" value="100"><output id="scaleOut">100%</output></div>
+        <div class="range-row"><span>ডানে-বামে</span><input id="photoX" type="range" min="-100" max="100" value="0"><output id="xOut">0</output></div>
+        <div class="range-row"><span>উপরে-নিচে</span><input id="photoY" type="range" min="-100" max="100" value="0"><output id="yOut">0</output></div>
+        <p class="file-name">প্রিভিউয়ের ছবির ওপর টেনে অবস্থানও বদলাতে পারবেন।</p>
+        <p class="group-title" style="margin-top:14px">লেখার ধরন</p>
+        <label class="field"><span>নাম ও বার্তার রং</span><input id="textColor" type="color" value="#0b6e3f" style="padding:4px;height:42px"></label>
+        <div class="range-row"><span>লেখার আকার</span><input id="textScale" type="range" min="80" max="125" value="100"><output id="textOut">100%</output></div>
+      </div>
+    </aside>
+  </section>
+</main>
+
+<dialog id="unlockDialog"><div class="modal"><h3>প্রিমিয়াম ডিজাইন আনলক করুন</h3><p>বিকাশে পেমেন্ট করার পর পাওয়া কোডটি লিখুন।</p><div class="payment-box"><span>বিকাশে সেন্ড মানি করুন</span><strong id="bkashNumber">01XXXXXXXXX</strong><b><span id="premiumPrice">১০০</span> টাকা</b></div><label class="code-label" for="unlockCode">আনলক কোড</label><div class="row"><input id="unlockCode" type="text" placeholder="কোড লিখুন" autocomplete="off" autocapitalize="characters"><button class="btn primary" id="verifyUnlock">আনলক করুন</button></div><div class="unlock-message" id="unlockMessage" aria-live="polite"></div><div class="modal-foot"><button class="btn ghost" data-close="unlockDialog">বন্ধ করুন</button><button class="btn gold" id="premiumService">আমাকে দিয়ে বানিয়ে নিন · ৩০০ টাকা</button></div></div></dialog>
+
+<script>
+(function(){
+  'use strict';
+  var CONFIG={
+    premiumPrice:100,
+    bkashNumber:'01741737889',
+    unlockCode:'POSTER100',
+    servicePrice:300,
+    whatsappNumber:'8801741737889'
+  };
+  var templates=[
+    {id:'c1',cat:'chairman',name:'চেয়ারম্যান বিজয়',sub:'ব্রাশ ব্যানার · বড় ছবি',premium:false,theme:1},
+    {id:'c2',cat:'chairman',name:'চেয়ারম্যান সূর্যোদয়',sub:'সানরশ্মি · গোল ছবি',premium:false,theme:2},
+    {id:'c3',cat:'chairman',name:'চেয়ারম্যান রয়্যাল',sub:'কালো ও সোনালি',premium:true,theme:3},
+    {id:'m1',cat:'member',name:'সদস্য সবুজ',sub:'উৎসবমুখর সবুজ',premium:false,theme:4},
+    {id:'m2',cat:'member',name:'সদস্য সাগর',sub:'নীল ঢেউ · সাইড ছবি',premium:false,theme:5},
+    {id:'m3',cat:'member',name:'সদস্য সাদা',sub:'পরিষ্কার মিনিমাল',premium:false,theme:6},
+    {id:'m4',cat:'member',name:'সদস্য গোল্ড প্রো',sub:'মেরুন ও সোনালি',premium:true,theme:7},
+    {id:'w1',cat:'women',name:'মহিলা বেগুনি',sub:'বেগুনি উৎসব',premium:false,theme:8},
+    {id:'w2',cat:'women',name:'মহিলা গোলাপি',sub:'গোলাপি ও সোনালি',premium:false,theme:9},
+    {id:'w3',cat:'women',name:'মহিলা টিল রয়্যাল',sub:'টিল ও সোনালি',premium:true,theme:10}
+  ];
+  var defaults={candidateName:'মোঃ আব্দুল করিম',postName:'চেয়ারম্যান পদপ্রার্থী',ward:'০৫ নং ওয়ার্ড',union:'সোনাপুর ইউনিয়ন',area:'কানাইঘাট, সিলেট',slogan:'উন্নয়ন ও জনসেবায় আপনার পাশে',symbol:'নির্বাচনী প্রতীক'};
+  var current=templates[0], photo=null, premiumUnlocked=false;
+  var canvas=document.getElementById('poster'),ctx=canvas.getContext('2d'),gallery=document.getElementById('gallery');
+  var ids=['candidateName','postName','ward','union','area','slogan','symbol'];
+  var controls={}; ids.forEach(function(id){controls[id]=document.getElementById(id)});
+  var pScale=document.getElementById('photoScale'),pX=document.getElementById('photoX'),pY=document.getElementById('photoY'),textColor=document.getElementById('textColor'),textScale=document.getElementById('textScale');
+  var wrap=document.getElementById('canvasWrap'),status=document.getElementById('status');
+  var W=1200,H=1500;
+
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  function renderGallery(filter){gallery.innerHTML='';var list=templates.filter(function(t){return filter==='all'||t.cat===filter});document.getElementById('templateCount').textContent=list.length.toLocaleString('bn-BD')+'টি ডিজাইন';list.forEach(function(t){var b=document.createElement('button');b.className='template-card'+(t.id===current.id?' active':'');b.dataset.id=t.id;var badge=t.premium?(premiumUnlocked?'খোলা':'৳'+CONFIG.premiumPrice.toLocaleString('bn-BD')):'ফ্রি';b.innerHTML='<div class="thumb t'+t.theme+'"><span class="badge '+(t.premium?'premium':'')+'">'+badge+'</span><strong>'+esc(t.name.replace('চেয়ারম্যান ','').replace('সদস্য ','').replace('মহিলা ',''))+'</strong><small>'+esc(t.sub)+'</small></div><div class="card-meta"><strong>'+esc(t.name)+'</strong><span>'+esc(t.sub)+'</span></div>';b.onclick=function(){selectTemplate(t.id)};gallery.appendChild(b)});}
+  function selectTemplate(id){current=templates.find(function(t){return t.id===id})||templates[0];document.getElementById('activeName').textContent=current.name;wrap.classList.toggle('locked',current.premium&&!premiumUnlocked);document.querySelectorAll('.template-card').forEach(function(x){x.classList.toggle('active',x.dataset.id===id)});if(current.cat==='chairman')controls.postName.value='চেয়ারম্যান পদপ্রার্থী';if(current.cat==='member')controls.postName.value='সদস্য পদপ্রার্থী';if(current.cat==='women')controls.postName.value='সংরক্ষিত মহিলা সদস্য পদপ্রার্থী';draw();if(current.premium&&!premiumUnlocked)openUnlockDialog();}
+  document.querySelectorAll('.tab').forEach(function(tab){tab.onclick=function(){document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active')});tab.classList.add('active');renderGallery(tab.dataset.filter)}});
+
+  function val(id){return controls[id].value.trim()}
+  function wardNum(){return (val('ward').replace('নং ওয়ার্ড','').replace('ওয়ার্ড','').replace('নং','').trim()||'০৫')}
+  function roundedPath(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath()}
+  function roundRect(x,y,w,h,r,fill,stroke){roundedPath(x,y,w,h,r);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke.color||stroke;ctx.lineWidth=(stroke.width||2);ctx.stroke()}}
+  function fitText(text,maxWidth,startSize,minSize,weight,color,align,family){var size=startSize;ctx.textAlign=align||'center';ctx.fillStyle=color;var fam=family||'"Hind Siliguri","Noto Sans Bengali","Nirmala UI","Vrinda",sans-serif';while(size>minSize){ctx.font=weight+' '+size+'px '+fam;if(ctx.measureText(text).width<=maxWidth)break;size-=2}return size}
+  function text(str,x,y,max,size,min,weight,color,align,family){fitText(str,max,size,min,weight,color,align,family);ctx.fillText(str,x,y)}
+  function drawPlaceholder(r,color){ctx.save();roundedPath(r.x,r.y,r.w,r.h,r.r);ctx.clip();ctx.fillStyle=color;ctx.fillRect(r.x,r.y,r.w,r.h);ctx.fillStyle='#cbd2cd';ctx.beginPath();ctx.arc(r.x+r.w/2,r.y+r.h*.32,r.w*.17,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.ellipse(r.x+r.w/2,r.y+r.h*.86,r.w*.36,r.h*.35,0,0,Math.PI*2);ctx.fill();ctx.restore()}
+  function drawPhoto(r){if(!photo){drawPlaceholder(r,'#e9ece9');return}ctx.save();roundedPath(r.x,r.y,r.w,r.h,r.r);ctx.clip();var scale=Number(pScale.value)/100;var base=Math.max(r.w/photo.width,r.h/photo.height)*scale;var w=photo.width*base,h=photo.height*base;var ox=Number(pX.value)/100*(w-r.w)/2,oy=Number(pY.value)/100*(h-r.h)/2;ctx.drawImage(photo,r.x+(r.w-w)/2+ox,r.y+(r.h-h)/2+oy,w,h);ctx.restore()}
+  function circlePhoto(cx,cy,rad){if(!photo){ctx.save();ctx.beginPath();ctx.arc(cx,cy,rad,0,Math.PI*2);ctx.clip();ctx.fillStyle='#e9ece9';ctx.fillRect(cx-rad,cy-rad,rad*2,rad*2);ctx.fillStyle='#cbd2cd';ctx.beginPath();ctx.arc(cx,cy-rad*.25,rad*.3,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.ellipse(cx,cy+rad*.55,rad*.62,rad*.6,0,0,Math.PI*2);ctx.fill();ctx.restore();return}ctx.save();ctx.beginPath();ctx.arc(cx,cy,rad,0,Math.PI*2);ctx.clip();var scale=Number(pScale.value)/100;var base=Math.max(2*rad/photo.width,2*rad/photo.height)*scale;var w=photo.width*base,h=photo.height*base;var ox=Number(pX.value)/100*(w-2*rad)/2,oy=Number(pY.value)/100*(h-2*rad)/2;ctx.drawImage(photo,cx-w/2+ox,cy-h/2+oy,w,h);ctx.restore()}
+  /* ---- shared decorations ---- */
+  function dots(color,alpha,step,radius){ctx.save();ctx.globalAlpha=alpha;ctx.fillStyle=color;for(var y=40;y<H;y+=step){for(var x=((y/step)%2)*step/2;x<W;x+=step){ctx.beginPath();ctx.arc(x,y,radius,0,Math.PI*2);ctx.fill()}}ctx.restore()}
+  function rays(cx,cy,c1,c2,n){for(var i=0;i<n;i++){var a0=(Math.PI*2*i)/n,a1=(Math.PI*2*(i+1))/n;ctx.fillStyle=i%2?c1:c2;ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,1400,a0,a1);ctx.closePath();ctx.fill()}}
+  function brushBanner(cx,y,w,h,fill){var x=cx-w/2;ctx.fillStyle=fill;ctx.beginPath();ctx.moveTo(x+18,y);ctx.lineTo(x+w-18,y);ctx.quadraticCurveTo(x+w,y,x+w,y+h/2);ctx.quadraticCurveTo(x+w,y+h,x+w-18,y+h);ctx.lineTo(x+18,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h/2);ctx.quadraticCurveTo(x,y,x+18,y);ctx.fill()}
+  function electionBanner(){var u=val('union').replace(/\s*ইউন\S*\s*$/u,'').trim();return (u||'আসন্ন')+' ইউনিয়ন পরিষদ নির্বাচন'}
+  function nameColor(fallback){var v=(textColor.value||'').toLowerCase();return v==='#0b6e3f'?(fallback||'#e8c25e'):textColor.value}
+  function vignette(alpha){var g=ctx.createRadialGradient(W/2,H/2,Math.min(W,H)*.40,W/2,H/2,Math.max(W,H)*.74);g.addColorStop(0,'rgba(0,0,0,0)');g.addColorStop(1,'rgba(0,0,0,'+(alpha||.30)+')');ctx.fillStyle=g;ctx.fillRect(0,0,W,H)}
+  function goldCorners(inset,len,color,lw){ctx.strokeStyle=color||'#d9ab3b';ctx.lineWidth=lw||6;var o=inset||40,l=len||120;[[o,o,1,1],[W-o,o,-1,1],[o,H-o,1,-1],[W-o,H-o,-1,-1]].forEach(function(c){ctx.beginPath();ctx.moveTo(c[0]+l*c[2],c[1]);ctx.lineTo(c[0],c[1]);ctx.lineTo(c[0],c[1]+l*c[3]);ctx.stroke()})}
+  function wardBadge(cx,cy,rad,bgColor,fgColor){ctx.fillStyle=bgColor;ctx.beginPath();ctx.arc(cx,cy,rad,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=8;ctx.stroke();text('ওয়ার্ড',cx,cy-rad*.28,rad*1.5,Math.round(rad*.34),16,'700',fgColor);text(wardNum(),cx,cy+rad*.5,rad*1.5,Math.round(rad*.72),30,'700',fgColor)}
+  function voteBar(y,h,bgColor,fgColor,accent){ctx.fillStyle=bgColor;ctx.fillRect(0,y,W,h);text((val('slogan')||'আপনার ভোটে জয়যুক্ত করুন'),W/2,y+h*.62,W-160,Math.round(h*.42),26,'700',fgColor)}
+  function goldFrame(inset,lw){ctx.strokeStyle='#d9ab3b';ctx.lineWidth=lw||10;ctx.strokeRect(inset,inset,W-inset*2,H-inset*2)}
+  function cornerRibbons(c1,c2){ctx.fillStyle=c1;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(300,0);ctx.lineTo(0,340);ctx.fill();ctx.fillStyle=c2;ctx.beginPath();ctx.moveTo(W,0);ctx.lineTo(W-300,0);ctx.lineTo(W,340);ctx.fill()}
+  function watermark(){if(current.premium)return;ctx.save();ctx.globalAlpha=.8;ctx.fillStyle='rgba(20,16,8,.78)';var bw=300,bh=36;roundRect(W-bw-24,H-bh-24,bw,bh,8,'rgba(20,16,8,.78)');ctx.fillStyle='#fff';ctx.font='500 17px "Noto Sans Bengali",sans-serif';ctx.textAlign='center';ctx.fillText('নির্বাচনী পোস্টার মেকার',W-24-bw/2,H-24-12);ctx.restore()}
+  /* ================= 10 UNIQUE THEME LAYOUTS ================= */
+  function theme1(){ /* চেয়ারম্যান বিজয় — brush banner + big photo (premium) */
+    var g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'#fffdf4');g.addColorStop(.6,'#fdf6e0');g.addColorStop(1,'#f7ead0');
+    ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    var glow=ctx.createRadialGradient(600,550,60,600,550,640);glow.addColorStop(0,'rgba(217,171,59,.22)');glow.addColorStop(1,'rgba(217,171,59,0)');
+    ctx.fillStyle=glow;ctx.fillRect(0,0,W,H);
+    dots('#0b7d49',.08,96,12);
+    cornerRibbons('#0b7d49','#d2202f');goldFrame(26,10);
+    ctx.strokeStyle='#b8862f';ctx.lineWidth=2.5;ctx.strokeRect(46,46,W-92,H-92);
+    text('বিসমিল্লাহির রাহমানির রাহিম',600,72,700,24,18,'600','#5c6861');
+    brushBanner(600,100,780,88,'#123f7e');text(electionBanner(),600,158,700,40,26,'700','#fff');
+    ctx.fillStyle='#d9ab3b';ctx.fillRect(430,196,340,5);
+    var r={x:250,y:240,w:700,h:620,r:64};
+    ctx.save();ctx.shadowColor='#0007';ctx.shadowBlur=28;ctx.shadowOffsetY=12;drawPhoto(r);ctx.restore();
+    ctx.lineWidth=14;ctx.strokeStyle='#d9ab3b';roundedPath(r.x,r.y,r.w,r.h,r.r);ctx.stroke();
+    ctx.lineWidth=3;ctx.strokeStyle='#8a6a1f';roundedPath(r.x+8,r.y+8,r.w-16,r.h-16,r.r-6);ctx.stroke();
+    ctx.lineWidth=4;ctx.strokeStyle='#fff';roundedPath(r.x+16,r.y+16,r.w-32,r.h-32,r.r-12);ctx.stroke();
+    wardBadge(992,310,96,'#d2202f','#fff');
+    var ts=Number(textScale.value)/100,nc=textColor.value||'#0b6e3f';
+    ctx.save();ctx.shadowColor='#0003';ctx.shadowBlur=12;ctx.shadowOffsetY=4;roundRect(140,896,920,140,30,'#ffffff');ctx.restore();
+    ctx.strokeStyle='#d9ab3b';ctx.lineWidth=8;roundedPath(140,896,920,140,30);ctx.stroke();
+    ctx.strokeStyle='#b8862f';ctx.lineWidth=2;roundedPath(152,908,896,116,24);ctx.stroke();
+    text(val('candidateName'),600,992,860,88*ts,44,'700',nc);
+    text(val('postName'),600,1100,800,44,26,'700','#c02733');
+    text(val('union')+' · '+val('area'),600,1150,800,30,18,'600','#41544a');
+    roundRect(430,1180,340,92,20,'#fff');ctx.strokeStyle='#0b7d49';ctx.lineWidth=6;ctx.stroke();
+    text('ভোট দিন',600,1218,300,30,20,'700','#c02733');text(val('symbol'),600,1258,300,26,16,'700','#0b7d49');
+    voteBar(1330,170,'#0b7d49','#fff');
+  }
+  function theme2(){ /* চেয়ারম্যান সূর্যোদয় — sunburst + circle photo (premium) */
+    rays(600,430,'#fff8e1','#f5b93f',28);dots('#a33c14',.07,110,11);
+    var halo=ctx.createRadialGradient(600,560,80,600,560,420);halo.addColorStop(0,'rgba(255,244,214,.85)');halo.addColorStop(1,'rgba(255,244,214,0)');
+    ctx.fillStyle=halo;ctx.fillRect(180,140,840,840);
+    ctx.strokeStyle='#d9ab3b';ctx.lineWidth=10;ctx.strokeRect(24,24,W-48,H-48);
+    ctx.strokeStyle='#b8862f';ctx.lineWidth=2.5;ctx.strokeRect(42,42,W-84,H-84);
+    text('বিসমিল্লাহির রাহমানির রাহিম',600,70,700,24,18,'600','#7a5a20');
+    brushBanner(600,98,780,88,'#a3241b');text(electionBanner(),600,156,700,40,26,'700','#fff');
+    ctx.fillStyle='#d9ab3b';ctx.fillRect(430,194,340,5);
+    ctx.save();ctx.shadowColor='#0006';ctx.shadowBlur=26;ctx.shadowOffsetY=10;circlePhoto(600,560,248);ctx.restore();
+    ctx.lineWidth=16;ctx.strokeStyle='#a3241b';ctx.beginPath();ctx.arc(600,560,264,0,Math.PI*2);ctx.stroke();
+    ctx.lineWidth=6;ctx.strokeStyle='#d9ab3b';ctx.beginPath();ctx.arc(600,560,282,0,Math.PI*2);ctx.stroke();
+    ctx.lineWidth=3;ctx.strokeStyle='#fff';ctx.beginPath();ctx.arc(600,560,244,0,Math.PI*2);ctx.stroke();
+    wardBadge(936,408,88,'#0b6e3f','#fff');
+    var ts=Number(textScale.value)/100,nc=textColor.value||'#0b5e38';
+    text(val('candidateName'),600,948,1000,96*ts,48,'700',nc);
+    brushBanner(600,984,560,92,'#a3241b');text(val('postName'),600,1046,520,40,24,'700','#fff');
+    text(val('union')+' · '+val('area'),600,1130,860,30,18,'600','#5a4a22');
+    text('আপনার মূল্যবান ভোটে জয়যুক্ত করুন',600,1180,860,30,18,'700','#a33c14');
+    ctx.save();ctx.shadowColor='#0003';ctx.shadowBlur=10;ctx.shadowOffsetY=4;roundRect(440,1210,320,84,18,'#fff');ctx.restore();
+    ctx.strokeStyle='#d9ab3b';ctx.lineWidth=6;roundedPath(440,1210,320,84,18);ctx.stroke();
+    text(val('symbol'),600,1264,290,28,16,'700','#a3241b');
+    voteBar(1330,170,'#a3242f','#fff');
+  }
+  function theme3(){ /* চেয়ারম্যান রয়্যাল — black & gold, side photo (premium) */
+    var g=ctx.createRadialGradient(600,620,120,600,620,950);g.addColorStop(0,'#1a1208');g.addColorStop(.55,'#0b0805');g.addColorStop(1,'#020202');
+    ctx.fillStyle=g;ctx.fillRect(0,0,W,H);dots('#d9ab3b',.13,110,10);vignette(.35);
+    goldFrame(28,12);ctx.strokeStyle='#8a6a1f';ctx.lineWidth=2.5;ctx.strokeRect(52,52,W-104,H-104);
+    goldCorners(76,110,'#d9ab3b',5);
+    var r={x:680,y:300,w:400,h:700,r:70};
+    ctx.save();ctx.shadowColor='#000';ctx.shadowBlur=34;drawPhoto(r);ctx.restore();
+    ctx.lineWidth=12;ctx.strokeStyle='#d9ab3b';roundedPath(r.x,r.y,r.w,r.h,r.r);ctx.stroke();
+    ctx.lineWidth=2.5;ctx.strokeStyle='#f5e3b0';roundedPath(r.x+10,r.y+10,r.w-20,r.h-20,r.r-8);ctx.stroke();
+    var ts=Number(textScale.value)/100,nc=nameColor('#e8c25e');
+    text('বিসমিল্লাহির রাহমানির রাহিম',360,150,560,24,18,'600','#c8a24a');
+    text(val('candidateName'),360,330,560,92*ts,46,'700',nc,'center','"Noto Serif Bengali","Hind Siliguri",serif');
+    ctx.fillStyle='#d9ab3b';ctx.fillRect(150,398,420,5);ctx.fillStyle='#8a6a1f';ctx.fillRect(150,408,420,2);
+    text(val('postName'),360,472,560,42,24,'700','#f5e3b0');
+    wardBadge(360,622,92,'#d9ab3b','#0a0906');
+    text(val('union'),360,782,560,32,18,'600','#d3bd82');text(val('area'),360,828,560,30,18,'600','#a68d55');
+    ctx.save();ctx.shadowColor='#d9ab3b55';ctx.shadowBlur=14;roundRect(140,880,440,96,18,'#141007',{color:'#d9ab3b',width:4});ctx.restore();
+    text('ভোট দিন · '+val('symbol'),360,940,420,28,16,'700','#e8c25e');
+    ctx.fillStyle='#d9ab3b';ctx.fillRect(120,1010,480,3);
+    text(val('slogan')||'আপনার ভোটে জয়যুক্ত করুন',360,1122,560,34,20,'600','#d3bd82');
+    var gb=ctx.createLinearGradient(0,1330,0,1500);gb.addColorStop(0,'#e9c65f');gb.addColorStop(1,'#c49a35');
+    ctx.fillStyle=gb;ctx.fillRect(0,1330,W,170);
+    ctx.fillStyle='#8a6a1f';ctx.fillRect(0,1330,W,4);
+    text('আপনার মূল্যবান ভোট ও দোয়া কামনা করি',600,1418,W-160,44,26,'700','#0a0906');
+  }
+  function theme4(){ /* সদস্য সবুজ — festive green (premium) */
+    var g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'#f2fff6');g.addColorStop(.5,'#a9e7c2');g.addColorStop(.82,'#12a05a');g.addColorStop(1,'#0a6e3c');
+    ctx.fillStyle=g;ctx.fillRect(0,0,W,H);dots('#ffffff',.12,96,11);
+    var sheen=ctx.createLinearGradient(0,0,W,H);sheen.addColorStop(0,'rgba(255,255,255,.25)');sheen.addColorStop(.35,'rgba(255,255,255,0)');
+    ctx.fillStyle=sheen;ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle='#fff';ctx.lineWidth=10;ctx.strokeRect(24,24,W-48,H-48);
+    ctx.strokeStyle='rgba(255,255,255,.55)';ctx.lineWidth=2.5;ctx.strokeRect(42,42,W-84,H-84);
+    text('বিসমিল্লাহির রাহমানির রাহিম',600,70,700,24,18,'600','#eafff3');
+    brushBanner(600,98,720,84,'#ffffff');text(electionBanner(),600,156,660,38,24,'700','#0b7d49');
+    ctx.fillStyle='#ffd23e';ctx.fillRect(440,192,320,5);
+    ctx.save();ctx.shadowColor='#0006';ctx.shadowBlur=26;ctx.shadowOffsetY=10;circlePhoto(600,520,232);ctx.restore();
+    ctx.lineWidth=16;ctx.strokeStyle='#fff';ctx.beginPath();ctx.arc(600,520,248,0,Math.PI*2);ctx.stroke();
+    ctx.lineWidth=5;ctx.strokeStyle='#ffd23e';ctx.beginPath();ctx.arc(600,520,266,0,Math.PI*2);ctx.stroke();
+    wardBadge(924,386,88,'#ffd23e','#0b5e38');
+    var ts=Number(textScale.value)/100,nc=textColor.value||'#ffffff';
+    ctx.save();ctx.shadowColor='#0005';ctx.shadowBlur=10;ctx.shadowOffsetY=3;text(val('candidateName'),600,906,1000,96*ts,48,'700',nc);ctx.restore();
+    text(val('postName'),600,976,800,44,26,'700','#ffd23e');
+    text(val('union')+' · '+val('area'),600,1030,860,30,18,'600','#eafff3');
+    ctx.save();ctx.shadowColor='#0004';ctx.shadowBlur=12;ctx.shadowOffsetY=5;roundRect(400,1066,400,92,22,'#ffffff');ctx.restore();
+    text('ভোট দিন · '+val('symbol'),600,1124,370,28,16,'700','#0b7d49');
+    voteBar(1330,170,'#083f27','#fff');
+  }
+  function theme5(){ /* সদস্য সাগর — blue waves, side photo (premium) */
+    var sky=ctx.createLinearGradient(0,0,0,1180);sky.addColorStop(0,'#f4faff');sky.addColorStop(1,'#d8e9fa');
+    ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
+    ctx.fillStyle='#2b7cd6';ctx.beginPath();ctx.moveTo(0,1120);ctx.quadraticCurveTo(300,1020,600,1100);ctx.quadraticCurveTo(900,1180,1200,1080);ctx.lineTo(1200,1500);ctx.lineTo(0,1500);ctx.fill();
+    ctx.fillStyle='#1663b8';ctx.beginPath();ctx.moveTo(0,1200);ctx.quadraticCurveTo(300,1100,600,1180);ctx.quadraticCurveTo(900,1260,1200,1160);ctx.lineTo(1200,1500);ctx.lineTo(0,1500);ctx.fill();
+    ctx.fillStyle='#0b3c7e';ctx.beginPath();ctx.moveTo(0,1300);ctx.quadraticCurveTo(400,1200,800,1280);ctx.quadraticCurveTo(1000,1320,1200,1280);ctx.lineTo(1200,1500);ctx.lineTo(0,1500);ctx.fill();
+    ctx.fillStyle='#ffffff';ctx.globalAlpha=.35;ctx.beginPath();ctx.moveTo(0,1140);ctx.quadraticCurveTo(300,1040,600,1120);ctx.quadraticCurveTo(900,1200,1200,1100);ctx.lineTo(1200,1130);ctx.quadraticCurveTo(900,1230,600,1150);ctx.quadraticCurveTo(300,1070,0,1170);ctx.fill();ctx.globalAlpha=1;
+    ctx.fillStyle='#1663b8';ctx.beginPath();ctx.moveTo(1200,0);ctx.quadraticCurveTo(1000,60,980,220);ctx.quadraticCurveTo(1100,120,1200,140);ctx.fill();
+    ctx.strokeStyle='#1663b8';ctx.lineWidth=8;ctx.strokeRect(24,24,W-48,H-48);
+    ctx.strokeStyle='#9cc3ea';ctx.lineWidth=2.5;ctx.strokeRect(42,42,W-84,H-84);
+    text('বিসমিল্লাহির রাহমানির রাহিম',600,72,700,24,18,'600','#5c7a99');
+    var r={x:90,y:330,w:440,h:620,r:80};
+    ctx.save();ctx.shadowColor='#0006';ctx.shadowBlur=24;ctx.shadowOffsetY=10;drawPhoto(r);ctx.restore();
+    ctx.lineWidth=12;ctx.strokeStyle='#1663b8';roundedPath(r.x,r.y,r.w,r.h,r.r);ctx.stroke();
+    ctx.lineWidth=3;ctx.strokeStyle='#fff';roundedPath(r.x+10,r.y+10,r.w-20,r.h-20,r.r-8);ctx.stroke();
+    var ts=Number(textScale.value)/100,nc=textColor.value||'#14509a';
+    text(val('candidateName'),835,500,560,84*ts,42,'700',nc);
+    brushBanner(835,548,460,84,'#d4283c');text(val('postName'),835,606,430,36,22,'700','#fff');
+    wardBadge(835,730,82,'#1663b8','#fff');
+    text(val('union'),835,860,560,32,18,'600','#33475c');text(val('area'),835,906,560,30,18,'600','#33475c');
+    ctx.fillStyle='#1663b8';ctx.fillRect(640,928,390,3);
+    roundRect(620,950,430,88,20,'#fff',{color:'#1663b8',width:5});text('ভোট দিন · '+val('symbol'),835,1006,400,26,16,'700','#1663b8');
+    voteBar(1330,170,'#0b3c7e','#fff');
+  }
+  function theme6(){ /* সদস্য সাদা — clean minimal (premium) */
+    ctx.fillStyle='#ffffff';ctx.fillRect(0,0,W,H);
+    var wash=ctx.createLinearGradient(0,0,0,H);wash.addColorStop(0,'rgba(28,107,68,0)');wash.addColorStop(1,'rgba(28,107,68,.05)');
+    ctx.fillStyle=wash;ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle='#1c6b44';ctx.lineWidth=6;ctx.strokeRect(24,24,W-48,H-48);
+    ctx.strokeStyle='#c9a227';ctx.lineWidth=2;ctx.strokeRect(40,40,W-80,H-80);
+    text('বিসমিল্লাহির রাহমানির রাহিম',600,96,700,24,18,'600','#6b7d72');
+    var r={x:350,y:200,w:500,h:560,r:70};
+    ctx.save();ctx.shadowColor='#0005';ctx.shadowBlur=22;ctx.shadowOffsetY=10;drawPhoto(r);ctx.restore();
+    ctx.lineWidth=7;ctx.strokeStyle='#1c6b44';roundedPath(r.x,r.y,r.w,r.h,r.r);ctx.stroke();
+    ctx.lineWidth=2;ctx.strokeStyle='#c9a227';roundedPath(r.x+10,r.y+10,r.w-20,r.h-20,r.r-8);ctx.stroke();
+    wardBadge(1020,220,78,'#1c6b44','#fff');
+    var ts=Number(textScale.value)/100,nc=textColor.value||'#1c6b44';
+    text(val('candidateName'),600,896,980,88*ts,44,'700',nc);
+    ctx.fillStyle='#c9a227';ctx.fillRect(560,912,80,4);
+    text(val('postName'),600,966,760,42,24,'700','#c02733');
+    ctx.fillStyle='#d7ddd8';ctx.fillRect(320,1002,560,2);
+    text(val('union')+' · '+val('area'),600,1054,860,30,18,'600','#41544a');
+    text('নির্বাচনী প্রতীক: '+val('symbol'),600,1104,860,30,18,'700','#1c6b44');
+    text('আপনার মূল্যবান ভোট দিন',600,1232,900,40,24,'700','#c02733');
+    text(val('slogan')||'উন্নয়ন ও জনসেবায় আপনার পাশে',600,1292,900,32,18,'600','#41544a');
+    var fb=ctx.createLinearGradient(0,1360,0,1500);fb.addColorStop(0,'#20744c');fb.addColorStop(1,'#145c39');
+    ctx.fillStyle=fb;ctx.fillRect(0,1360,W,140);
+    ctx.fillStyle='#c9a227';ctx.fillRect(0,1360,W,3);
+    text('ভোট চাই · দোয়া চাই',600,1442,W-160,44,26,'700','#fff');
+  }
+  function theme7(){ /* সদস্য গোল্ড প্রো — maroon & gold (premium) */
+    var g=ctx.createRadialGradient(600,580,100,600,580,950);g.addColorStop(0,'#7c2635');g.addColorStop(.55,'#3d1119');g.addColorStop(1,'#170406');
+    ctx.fillStyle=g;ctx.fillRect(0,0,W,H);dots('#d9ab3b',.11,110,10);vignette(.35);
+    goldFrame(28,12);ctx.strokeStyle='#8a6a1f';ctx.lineWidth=2.5;ctx.strokeRect(52,52,W-104,H-104);
+    goldCorners(76,110,'#d9ab3b',5);
+    text('বিসমিল্লাহির রাহমানির রাহিম',600,92,700,24,18,'600','#c8a24a');
+    var r={x:380,y:220,w:440,h:640,r:220};
+    ctx.save();ctx.shadowColor='#000';ctx.shadowBlur=34;drawPhoto(r);ctx.restore();
+    ctx.lineWidth=12;ctx.strokeStyle='#d9ab3b';roundedPath(r.x,r.y,r.w,r.h,r.r);ctx.stroke();
+    ctx.lineWidth=2.5;ctx.strokeStyle='#f5e3b0';roundedPath(r.x+10,r.y+10,r.w-20,r.h-20,r.r-8);ctx.stroke();
+    wardBadge(950,300,88,'#d9ab3b','#2a0d12');
+    var ts=Number(textScale.value)/100,nc=nameColor('#e8c25e');
+    text(val('candidateName'),600,1002,1000,88*ts,44,'700',nc,'center','"Noto Serif Bengali","Hind Siliguri",serif');
+    text(val('postName'),600,1072,760,42,24,'700','#f5e3b0');
+    ctx.fillStyle='#d9ab3b';ctx.fillRect(430,1112,340,5);ctx.fillStyle='#8a6a1f';ctx.fillRect(430,1121,340,2);
+    text(val('union')+' · '+val('area'),600,1162,860,30,18,'600','#d3bd82');
+    ctx.save();ctx.shadowColor='#d9ab3b44';ctx.shadowBlur=14;roundRect(400,1198,400,88,20,'#1c0a0e',{color:'#d9ab3b',width:4});ctx.restore();
+    text('ভোট দিন · '+val('symbol'),600,1254,370,28,16,'700','#e8c25e');
+    var gb=ctx.createLinearGradient(0,1330,0,1500);gb.addColorStop(0,'#e9c65f');gb.addColorStop(1,'#c49a35');
+    ctx.fillStyle=gb;ctx.fillRect(0,1330,W,170);
+    ctx.fillStyle='#8a6a1f';ctx.fillRect(0,1330,W,4);
+    text(val('slogan')||'আপনার ভোটে জয়যুক্ত করুন',600,1418,W-160,44,26,'700','#2a0d12');
+  }
+  function theme8(){ /* মহিলা বেগুনি — festive purple (premium) */
+    var g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'#f9f0fa');g.addColorStop(.5,'#b483c7');g.addColorStop(.84,'#6e3486');g.addColorStop(1,'#4a2060');
+    ctx.fillStyle=g;ctx.fillRect(0,0,W,H);dots('#ffffff',.11,96,11);
+    var sheen=ctx.createLinearGradient(0,0,W,H);sheen.addColorStop(0,'rgba(255,255,255,.22)');sheen.addColorStop(.35,'rgba(255,255,255,0)');
+    ctx.fillStyle=sheen;ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle='#fff';ctx.lineWidth=10;ctx.strokeRect(24,24,W-48,H-48);
+    ctx.strokeStyle='rgba(255,255,255,.55)';ctx.lineWidth=2.5;ctx.strokeRect(42,42,W-84,H-84);
+    text('বিসমিল্লাহির রাহমানির রাহিম',600,70,700,24,18,'600','#f6e9f7');
+    brushBanner(600,98,720,84,'#ffffff');text(electionBanner(),600,156,660,38,24,'700','#6a3583');
+    ctx.fillStyle='#ffd23e';ctx.fillRect(440,192,320,5);
+    ctx.save();ctx.shadowColor='#0006';ctx.shadowBlur=26;ctx.shadowOffsetY=10;circlePhoto(600,520,232);ctx.restore();
+    ctx.lineWidth=16;ctx.strokeStyle='#fff';ctx.beginPath();ctx.arc(600,520,248,0,Math.PI*2);ctx.stroke();
+    ctx.lineWidth=6;ctx.strokeStyle='#ffd23e';ctx.beginPath();ctx.arc(600,520,266,0,Math.PI*2);ctx.stroke();
+    ctx.lineWidth=2.5;ctx.strokeStyle='#fff';ctx.beginPath();ctx.arc(600,520,278,0,Math.PI*2);ctx.stroke();
+    wardBadge(924,386,88,'#ffd23e','#5b2a72');
+    var ts=Number(textScale.value)/100,nc=textColor.value||'#ffffff';
+    ctx.save();ctx.shadowColor='#0005';ctx.shadowBlur=10;ctx.shadowOffsetY=3;text(val('candidateName'),600,906,1000,92*ts,46,'700',nc);ctx.restore();
+    text(val('postName'),600,976,800,44,26,'700','#ffe08a');
+    text(val('union')+' · '+val('area'),600,1030,860,30,18,'600','#f6e9f7');
+    ctx.save();ctx.shadowColor='#0004';ctx.shadowBlur=12;ctx.shadowOffsetY=5;roundRect(400,1066,400,92,22,'#ffffff');ctx.restore();
+    text('ভোট দিন · '+val('symbol'),600,1124,370,28,16,'700','#6a3583');
+    voteBar(1330,170,'#4d2560','#fff');
+  }
+  function theme9(){ /* মহিলা গোলাপি — rose (premium) */
+    var g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'#fff5f8');g.addColorStop(.55,'#f6c3d4');g.addColorStop(.85,'#e09ab5');g.addColorStop(1,'#c9738f');
+    ctx.fillStyle=g;ctx.fillRect(0,0,W,H);dots('#ffffff',.14,90,10);
+    var sheen=ctx.createLinearGradient(0,0,W,H);sheen.addColorStop(0,'rgba(255,255,255,.28)');sheen.addColorStop(.4,'rgba(255,255,255,0)');
+    ctx.fillStyle=sheen;ctx.fillRect(0,0,W,H);
+    cornerRibbons('#cdeeda','#f0a8bf');
+    ctx.strokeStyle='#ffffff';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(0,318);ctx.lineTo(278,0);ctx.stroke();ctx.beginPath();ctx.moveTo(W,318);ctx.lineTo(W-278,0);ctx.stroke();
+    ctx.strokeStyle='#a83a63';ctx.lineWidth=8;ctx.strokeRect(28,28,W-56,H-56);
+    ctx.strokeStyle='#e8b7c8';ctx.lineWidth=2.5;ctx.strokeRect(44,44,W-88,H-88);
+    text('বিসমিল্লাহির রাহমানির রাহিম',600,84,700,24,18,'600','#8a4a63');
+    var r={x:330,y:230,w:540,h:600,r:120};
+    ctx.save();ctx.shadowColor='#0005';ctx.shadowBlur=24;ctx.shadowOffsetY=10;drawPhoto(r);ctx.restore();
+    ctx.lineWidth=16;ctx.strokeStyle='#fff';roundedPath(r.x,r.y,r.w,r.h,r.r);ctx.stroke();
+    ctx.lineWidth=5;ctx.strokeStyle='#d9ab3b';roundedPath(r.x+22,r.y+22,r.w-44,r.h-44,r.r-16);ctx.stroke();
+    wardBadge(972,300,88,'#a83a63','#fff');
+    var ts=Number(textScale.value)/100,nc=textColor.value||'#a83a63';
+    text(val('candidateName'),600,968,980,90*ts,45,'700',nc);
+    brushBanner(600,1004,560,88,'#a83a63');text(val('postName'),600,1062,520,38,22,'700','#fff');
+    ctx.fillStyle='#d9ab3b';ctx.fillRect(480,1098,240,4);
+    text(val('union')+' · '+val('area'),600,1142,860,30,18,'600','#7a2447');
+    ctx.save();ctx.shadowColor='#0003';ctx.shadowBlur=10;ctx.shadowOffsetY=4;roundRect(410,1174,380,88,20,'#fff');ctx.restore();
+    ctx.strokeStyle='#a83a63';ctx.lineWidth=6;roundedPath(410,1174,380,88,20);ctx.stroke();
+    text('ভোট দিন · '+val('symbol'),600,1230,350,26,16,'700','#a83a63');
+    voteBar(1330,170,'#a83a63','#fff');
+  }
+  function theme10(){ /* মহিলা টিল রয়্যাল — dark teal & gold (premium) */
+    var g=ctx.createRadialGradient(600,580,100,600,580,980);g.addColorStop(0,'#14756d');g.addColorStop(.55,'#08302b');g.addColorStop(1,'#020807');
+    ctx.fillStyle=g;ctx.fillRect(0,0,W,H);dots('#d9ab3b',.12,110,10);vignette(.35);
+    goldFrame(28,12);ctx.strokeStyle='#8a6a1f';ctx.lineWidth=2.5;ctx.strokeRect(52,52,W-104,H-104);
+    goldCorners(76,110,'#d9ab3b',5);
+    var r={x:680,y:300,w:400,h:700,r:70};
+    ctx.save();ctx.shadowColor='#000';ctx.shadowBlur=34;drawPhoto(r);ctx.restore();
+    ctx.lineWidth=12;ctx.strokeStyle='#d9ab3b';roundedPath(r.x,r.y,r.w,r.h,r.r);ctx.stroke();
+    ctx.lineWidth=2.5;ctx.strokeStyle='#f5e3b0';roundedPath(r.x+10,r.y+10,r.w-20,r.h-20,r.r-8);ctx.stroke();
+    var ts=Number(textScale.value)/100,nc=nameColor('#e8c25e');
+    text('বিসমিল্লাহির রাহমানির রাহিম',360,150,560,24,18,'600','#c8a24a');
+    text(val('candidateName'),360,330,560,88*ts,44,'700',nc,'center','"Noto Serif Bengali","Hind Siliguri",serif');
+    ctx.fillStyle='#d9ab3b';ctx.fillRect(150,398,420,5);ctx.fillStyle='#8a6a1f';ctx.fillRect(150,408,420,2);
+    text(val('postName'),360,470,560,40,24,'700','#f5e3b0');
+    wardBadge(360,620,92,'#d9ab3b','#04110e');
+    text(val('union'),360,780,560,32,18,'600','#d3bd82');text(val('area'),360,826,560,30,18,'600','#a68d55');
+    ctx.save();ctx.shadowColor='#d9ab3b55';ctx.shadowBlur=14;roundRect(140,880,440,96,18,'#0a1f1b',{color:'#d9ab3b',width:4});ctx.restore();
+    text('ভোট দিন · '+val('symbol'),360,940,420,28,16,'700','#e8c25e');
+    ctx.fillStyle='#d9ab3b';ctx.fillRect(120,1010,480,3);
+    text(val('slogan')||'আপনার ভোটে জয়যুক্ত করুন',360,1122,560,34,20,'600','#d3bd82');
+    var gb=ctx.createLinearGradient(0,1330,0,1500);gb.addColorStop(0,'#e9c65f');gb.addColorStop(1,'#c49a35');
+    ctx.fillStyle=gb;ctx.fillRect(0,1330,W,170);
+    ctx.fillStyle='#8a6a1f';ctx.fillRect(0,1330,W,4);
+    text('আপনার মূল্যবান ভোট ও দোয়া কামনা করি',600,1418,W-160,44,26,'700','#04110e');
+  }
+  var themeFns=[null,theme1,theme2,theme3,theme4,theme5,theme6,theme7,theme8,theme9,theme10];
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    (themeFns[current.theme]||theme1)();
+    watermark();
+  }
+  /* ---- events: same proven logic ---- */
+  ids.forEach(function(id){controls[id].addEventListener('input',draw)});textColor.addEventListener('input',draw);textScale.addEventListener('input',function(){document.getElementById('textOut').value=textScale.value+'%';draw()});[pScale,pX,pY].forEach(function(el){el.addEventListener('input',function(){document.getElementById('scaleOut').value=pScale.value+'%';document.getElementById('xOut').value=Math.round(pX.value);document.getElementById('yOut').value=Math.round(pY.value);draw()})});
+  document.getElementById('photoInput').onchange=function(e){var f=e.target.files[0];if(!f)return;if(f.size>8*1024*1024){setStatus('ছবির সাইজ ৮ MB-এর কম হতে হবে।','err');return}var img=new Image();img.onload=function(){photo=img;document.getElementById('fileName').textContent=f.name;draw();setStatus('ছবি যোগ হয়েছে। স্লাইডার দিয়ে অবস্থান ঠিক করুন।','ok')};img.onerror=function(){setStatus('ছবিটি পড়া যায়নি। অন্য JPG বা PNG চেষ্টা করুন।','err')};img.src=URL.createObjectURL(f)};
+  function setStatus(msg,type){status.textContent=msg;status.className='status '+(type||'')}
+  function openUnlockDialog(){var dialog=document.getElementById('unlockDialog');document.getElementById('bkashNumber').textContent=CONFIG.bkashNumber;document.getElementById('premiumPrice').textContent=CONFIG.premiumPrice.toLocaleString('bn-BD');document.getElementById('unlockCode').value='';document.getElementById('unlockMessage').textContent='';document.getElementById('unlockMessage').className='unlock-message';if(!dialog.open)dialog.showModal();setTimeout(function(){document.getElementById('unlockCode').focus()},30)}
+  function canDownload(){if(current.premium&&!premiumUnlocked){openUnlockDialog();return false}return true}
+  function fileSafe(s){return s.replace(/\s+/g,'-').replace(/[^\w\u0980-\u09FF-]/g,'').slice(0,30)||'poster'}
+  function downloadBlob(blob,name){var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},1000)}
+  document.getElementById('downloadJpg').onclick=function(){if(!canDownload())return;draw();canvas.toBlob(function(blob){downloadBlob(blob,fileSafe(val('candidateName'))+'-poster.jpg');setStatus('JPG ডাউনলোড শুরু হয়েছে।','ok')},'image/jpeg',.94)};
+  function dataUrlToBytes(url){var bin=atob(url.split(',')[1]),a=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)a[i]=bin.charCodeAt(i);return a}
+  function makePdf(jpeg,w,h){var head='%PDF-1.3\n',parts=[],offsets=[],len=0;function push(s){var b=typeof s==='string'?new TextEncoder().encode(s):s;parts.push(b);len+=b.length}push(head);function obj(n,s){offsets[n]=len;push(n+' 0 obj\n'+s+'\nendobj\n')}obj(1,'<< /Type /Catalog /Pages 2 0 R >>');obj(2,'<< /Type /Pages /Kids [3 0 R] /Count 1 >>');obj(3,'<< /Type /Page /Parent 2 0 R /MediaBox [0 0 576 720] /Resources << /XObject << /Im0 4 0 R >> >> /Contents 5 0 R >>');offsets[4]=len;push('4 0 obj\n<< /Type /XObject /Subtype /Image /Width '+w+' /Height '+h+' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length '+jpeg.length+' >>\nstream\n');push(jpeg);push('\nendstream\nendobj\n');var cmd='q\n576 0 0 720 0 0 cm\n/Im0 Do\nQ';obj(5,'<< /Length '+cmd.length+' >>\nstream\n'+cmd+'\nendstream');var xref=len;push('xref\n0 6\n0000000000 65535 f \n');for(var i=1;i<=5;i++)push(String(offsets[i]).padStart(10,'0')+' 00000 n \n');push('trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n'+xref+'\n%%EOF');return new Blob(parts,{type:'application/pdf'})}
+  document.getElementById('downloadPdf').onclick=function(){if(!canDownload())return;draw();var bytes=dataUrlToBytes(canvas.toDataURL('image/jpeg',.95));downloadBlob(makePdf(bytes,1200,1500),fileSafe(val('candidateName'))+'-poster.pdf');setStatus('প্রিন্টের জন্য PDF ডাউনলোড শুরু হয়েছে।','ok')};
+  document.getElementById('openUnlock').onclick=openUnlockDialog;
+  function verifyUnlock(){var input=document.getElementById('unlockCode'),message=document.getElementById('unlockMessage');if(input.value.trim()===CONFIG.unlockCode){premiumUnlocked=true;wrap.classList.remove('locked');message.textContent='কোড সঠিক—সব প্রিমিয়াম ডিজাইন আনলক হয়েছে।';message.className='unlock-message ok';renderGallery(document.querySelector('.tab.active').dataset.filter);setStatus('প্রিমিয়াম ডিজাইন আনলক হয়েছে। এখন ডাউনলোড করতে পারবেন।','ok');setTimeout(function(){document.getElementById('unlockDialog').close()},550)}else{message.textContent='কোডটি সঠিক নয়। আবার চেষ্টা করুন।';message.className='unlock-message';input.select()}}
+  document.getElementById('verifyUnlock').onclick=verifyUnlock;
+  document.getElementById('unlockCode').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();verifyUnlock()}});
+  document.querySelectorAll('[data-close]').forEach(function(b){b.onclick=function(){document.getElementById(b.dataset.close).close()}});
+  document.getElementById('resetBtn').onclick=function(){Object.keys(defaults).forEach(function(k){controls[k].value=defaults[k]});pScale.value=100;pX.value=0;pY.value=0;textScale.value=100;textColor.value='#0b6e3f';document.getElementById('scaleOut').value='100%';document.getElementById('xOut').value='0';document.getElementById('yOut').value='0';document.getElementById('textOut').value='100%';photo=null;document.getElementById('photoInput').value='';document.getElementById('fileName').textContent='PNG, JPG বা WEBP';draw();setStatus('তথ্য রিসেট হয়েছে।','ok')};
+  function openServiceWhatsApp(){var message='আমি '+CONFIG.servicePrice.toLocaleString('bn-BD')+' টাকার ইউনিয়ন নির্বাচন পোস্টার ডিজাইন সার্ভিস অর্ডার করতে চাই।\n\nনাম: '+val('candidateName')+'\nপদ: '+val('postName')+'\nওয়ার্ড: '+val('ward')+'\nইউনিয়ন: '+val('union')+'\nউপজেলা/জেলা: '+val('area')+'\nপছন্দের ডিজাইন: '+current.name+'\n\nছবিটি হোয়াটসঅ্যাপে পাঠাব।';window.open('https://wa.me/'+CONFIG.whatsappNumber+'?text='+encodeURIComponent(message),'_blank','noopener,noreferrer')}
+  document.getElementById('serviceBtn').onclick=openServiceWhatsApp;
+  document.getElementById('premiumService').onclick=function(){document.getElementById('unlockDialog').close();openServiceWhatsApp()};
+  var dragging=false,last={x:0,y:0};canvas.addEventListener('pointerdown',function(e){if(!photo)return;dragging=true;last={x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId)});canvas.addEventListener('pointermove',function(e){if(!dragging)return;var dx=e.clientX-last.x,dy=e.clientY-last.y;last={x:e.clientX,y:e.clientY};pX.value=Math.max(-100,Math.min(100,Number(pX.value)+dx/2));pY.value=Math.max(-100,Math.min(100,Number(pY.value)+dy/2));document.getElementById('xOut').value=Math.round(pX.value);document.getElementById('yOut').value=Math.round(pY.value);draw()});canvas.addEventListener('pointerup',function(){dragging=false});canvas.addEventListener('pointercancel',function(){dragging=false});
+  document.getElementById('servicePriceText').textContent=CONFIG.servicePrice.toLocaleString('bn-BD');document.getElementById('premiumService').textContent='আমাকে দিয়ে বানিয়ে নিন · '+CONFIG.servicePrice.toLocaleString('bn-BD')+' টাকা';renderGallery('all');if(document.fonts&&document.fonts.ready){document.fonts.ready.then(draw)}else draw();
+})();
+</script>
+</body>
+</html>
